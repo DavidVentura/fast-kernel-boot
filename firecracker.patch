@@ -1,0 +1,16 @@
+diff --git a/src/vmm/src/vstate/memory.rs b/src/vmm/src/vstate/memory.rs
+index b2dca00..3508512 100644
+--- a/src/vmm/src/vstate/memory.rs
++++ b/src/vmm/src/vstate/memory.rs
+@@ -171,9 +171,9 @@ impl GuestMemoryExtension for GuestMemoryMmap {
+     ) -> Result<Self, MemoryError> {
+         let prot = libc::PROT_READ | libc::PROT_WRITE;
+         let flags = if shared {
+-            libc::MAP_NORESERVE | libc::MAP_SHARED
++            libc::MAP_NORESERVE | libc::MAP_SHARED | libc::MAP_HUGETLB | libc::MAP_ANONYMOUS
+         } else {
+-            libc::MAP_NORESERVE | libc::MAP_PRIVATE
++            libc::MAP_NORESERVE | libc::MAP_PRIVATE | libc::MAP_HUGETLB | libc::MAP_ANONYMOUS
+         };
+         let regions = regions
+             .into_iter()
